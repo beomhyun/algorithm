@@ -7,7 +7,7 @@ public class line6 {
         String sorting = sc.next();
         
         int maxheight = 0;
-        int width = 0;
+        int width = 0; 
         int[] w = new int[N];
         String[] num = new String[N];
         int numcnt=0;

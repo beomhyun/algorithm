@@ -23,47 +23,48 @@ public class ·Îº¿Ã»¼Ò±â {
 		visit[r][c] = true;
 		int cnt = 1;
 		while(true) {
-			System.out.println("r : "+ r + "   c : "+ c );
-			int dd = d-1;
-			if(dd == -1) dd=3;
-			if(r+dx[dd]>=0 && c+dy[dd]>=0 && r+dx[dd] <N && c+dy[dd]<M && !visit[r+dx[dd]][c+dy[dd]] && map[r+dx[dd]][c+dy[dd]] != 1) {
-				d = dd;
-				r += dx[d];
-				c += dy[d];
-				visit[r][c] = true;
-				cnt++;
-				continue;
-			}else {
-				boolean check = true;
-				int tmpx = r;
-				int tmpy = c;
-				for (int i = 0; i < 4; i++) {
-					d--;
-					if(d == -1) d=3;
-					if(r+dx[d]>=0 && c+dy[d]>=0 && r+dx[d] <N && c+dy[d]<M && !visit[r+dx[d]][c+dy[d]] && map[r+dx[d]][c+dy[d]] == 0 ) {
-						check = false;
-						tmpx = r+dx[d];
-						tmpy = c+dy[d];
-						visit[tmpx][tmpy] = true;
-						cnt++;
-						break;
-					}
+//			System.out.println("r  : " + r + " c : "+ c +"  d  :" + d);
+//			for (int i = 0; i < visit.length; i++) {
+//				for (int j = 0; j < visit[i].length; j++) {
+//					if(visit[i][j]) System.out.print(1+" ");
+//					else System.out.print(0+" ");
+//				}System.out.println();
+//			}
+			boolean check = true;
+			int dd = d;
+			for (int i = 0; i < 4; i++) {
+				dd--;
+				if(dd==-1) dd = 3;
+				int x = r + dx[dd];
+				int y = c + dy[dd];
+				if(x >= 0 && y>=0 && x < N && y <M && !visit[x][y] && map[x][y]!=1 ) {
+					visit[x][y] = true;
+					cnt++;
+					r = x;
+					c = y;
+					check = false;
+					d=dd;
+					break;
 				}
-				if(check) {
-					dd = (d+2)%4;
-					if(r+dx[dd]>=0 && c+dy[dd]>=0 && r+dx[dd] <N && c+dy[dd]<M && map[r+dx[dd]][c+dy[dd]] != 1) {
-						r += dx[dd];
-						c += dx[dd];
-						continue;
-					}else {
-						break;
-					}
-				}
-				r = tmpx;
-				c = tmpy;
 			}
+			if(check) {
+				check = true;
+				dd = d;
+				for (int i = 0; i < 2; i++) {
+					dd--;
+					if(dd==-1)dd=3;
+				}
+				int x = r+dx[dd];
+				int y = c+dy[dd];
+				if(x >= 0 && y>=0 && x < N && y <M && map[x][y]==1 ) {
+					break;
+				}else {
+					r = x;
+					c = y;
+				}
+			}
+			
 		}
 		System.out.println(cnt);
-		
 	}
 }
